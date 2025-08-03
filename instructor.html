@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강사 소개 - 비즈니스 커리어 컨설팅</title>
+    <link rel="stylesheet" href="instructor.css">
+    <!-- 폰트 추가 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">비즈니스 커리어 컨설팅</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="instructor.html" class="active">강사 소개</a></li>
+                <li><a href="courses.html">강의 정보</a></li>
+                <li><a href="challenge.html">챌린지</a></li>
+                <li><a href="consulting.html">개인 컨설팅</a></li>
+                <li><a href="contact.html">문의</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 강사 프로필 섹션 -->
+        <section class="instructor-profile">
+            <div class="container">
+                <h1 class="section-title">강사 소개</h1>
+                
+                <!-- 강사 기본 정보 -->
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img id="instructor-photo" src="" alt="강사 프로필 사진">
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="instructor-name" id="instructor-name"></h2>
+                        <p class="instructor-title" id="instructor-title"></p>
+                        <p class="instructor-description" id="instructor-description"></p>
+                        
+                        <!-- 전문 분야 -->
+                        <div class="expertise">
+                            <h3>전문 분야</h3>
+                            <ul class="expertise-list" id="expertise-list">
+                                <!-- JavaScript로 동적 생성 -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 경력 및 자격 섹션 -->
+        <section class="experience-section">
+            <div class="container">
+                <h2 class="section-title">경력 및 자격</h2>
+                
+                <div class="experience-grid">
+                    <!-- 경력 -->
+                    <div class="experience-card">
+                        <h3>주요 경력</h3>
+                        <div class="timeline" id="experience-timeline">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+                    </div>
+
+                    <!-- 자격 및 수상 -->
+                    <div class="experience-card">
+                        <h3>자격 및 수상</h3>
+                        <div class="certifications" id="certifications">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 강의 및 컨설팅 실적 -->
+        <section class="achievements-section">
+            <div class="container">
+                <h2 class="section-title">강의 및 컨설팅 실적</h2>
+                
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- JavaScript로 동적 생성 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA 섹션 -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>지금 바로 시작하세요!</h2>
+                <p>전문가의 조언으로 여러분의 커리어를 한 단계 업그레이드하세요.</p>
+                <div class="cta-buttons">
+                    <a href="courses.html" class="btn btn-primary">강의 신청하기</a>
+                    <a href="consulting.html" class="btn btn-secondary">컨설팅 예약하기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>비즈니스 커리어 컨설팅</h3>
+                    <p>여러분의 성공적인 커리어를 위한 최고의 파트너</p>
+                </div>
+                <div class="footer-section">
+                    <h3>연락처</h3>
+                    <p id="contact-email">이메일: </p>
+                    <p id="contact-phone">전화: </p>
+                </div>
+                <div class="footer-section">
+                    <h3>SNS</h3>
+                    <div class="social-links" id="social-links">
+                        <!-- JavaScript로 동적 생성 -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 비즈니스 커리어 컨설팅. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 강사 데이터를 불러와서 페이지에 표시하는 함수
+        async function loadInstructorData() {
+            try {
+                // JSON 파일에서 강사 데이터 불러오기
+                const response = await fetch('instructor-data.json');
+                const data = await response.json();
+                const instructor = data.instructor;
+
+                // 기본 정보 설정
+                document.getElementById('instructor-photo').src = instructor.photo;
+                document.getElementById('instructor-photo').alt = `${instructor.name} 프로필 사진`;
+                document.getElementById('instructor-name').textContent = instructor.name;
+                document.getElementById('instructor-title').textContent = instructor.title;
+                document.getElementById('instructor-description').textContent = instructor.description;
+
+                // 전문 분야 목록 생성
+                const expertiseList = document.getElementById('expertise-list');
+                expertiseList.innerHTML = instructor.expertise.map(item => 
+                    `<li>${item}</li>`
+                ).join('');
+
+                // 경력 타임라인 생성
+                const experienceTimeline = document.getElementById('experience-timeline');
+                experienceTimeline.innerHTML = instructor.experience.map(item => `
+                    <div class="timeline-item">
+                        <div class="year">${item.year}</div>
+                        <div class="content">
+                            <h4>${item.position}</h4>
+                            <p>${item.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                // 자격증 목록 생성
+                const certifications = document.getElementById('certifications');
+                certifications.innerHTML = instructor.certifications.map(item => `
+                    <div class="cert-item">
+                        <h4>${item.name}</h4>
+                        <p>${item.institution}</p>
+                    </div>
+                `).join('');
+
+                // 실적 통계 생성
+                const achievementsGrid = document.getElementById('achievements-grid');
+                achievementsGrid.innerHTML = instructor.achievements.map(item => `
+                    <div class="achievement-card">
+                        <div class="achievement-number">${item.number}</div>
+                        <div class="achievement-label">${item.label}</div>
+                    </div>
+                `).join('');
+
+                // 연락처 정보 설정
+                document.getElementById('contact-email').textContent = `이메일: ${instructor.contact.email}`;
+                document.getElementById('contact-phone').textContent = `전화: ${instructor.contact.phone}`;
+
+                // SNS 링크 생성
+                const socialLinks = document.getElementById('social-links');
+                socialLinks.innerHTML = `
+                    <a href="${instructor.contact.social.youtube}" class="social-link" target="_blank">YouTube</a>
+                    <a href="${instructor.contact.social.instagram}" class="social-link" target="_blank">Instagram</a>
+                    <a href="${instructor.contact.social.blog}" class="social-link" target="_blank">Blog</a>
+                `;
+
+            } catch (error) {
+                console.error('강사 데이터를 불러오는 중 오류가 발생했습니다:', error);
+                // 오류 발생 시 기본 메시지 표시
+                document.getElementById('instructor-name').textContent = '강사 정보를 불러올 수 없습니다';
+            }
+        }
+
+        // 페이지 로드 시 데이터 불러오기
+        document.addEventListener('DOMContentLoaded', loadInstructorData);
+    </script>
+</body>
+</html> 
